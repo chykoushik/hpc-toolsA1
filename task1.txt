@@ -1,0 +1,19 @@
+What is the purpose of this code? What does the code compute to get it?
+ 
+This code solves the system of linear equations with a square matrix A and multiple right-hand sides b. The process where DGESV computes the solution to a genuine system of linear equations was carried out by Lapack DGESV. It answers the matrix equation AX = b, where A is a N-by-N matrix, b is a N-by-NRHS matrix, and X is the unsolved matrix. The rotation of the row and the lower-to-upper breakdown form the foundation of Lapack.
+ 
+2.  Briefly describe alternative mathematical methods to perform the same operation. 
+ 
+Using Gauss's elimination method. Systematic linear equations can be solved using Gauss Elimination Method. The techniqueDGESV computes the solution to a real system of linear equations is also known as Row Reduction Technique. System of linear equations with n unknown variables is formed by forming a matrix with n rows and n+1 columns. This matrix is also known as Augmented Matrix. Back Substitution is used to obtain the final result.
+ 
+3.  What alternative(s) do you think is more demanding, from a computational point of view and in terms of memory consumption?
+
+Gaussian elimination or another alternative could be LU decomposition. It is the same computational cost whether X is solved by Gaussian elimination or through LU-decomposition. But, for example, support A is fixed but b is not where AX=B1, AX=B2, AX=B3,........Here, since we only need to deconstruct A into LU, LU-decomposition is more effective than Gauss elimination in terms of memory consumption.
+
+4.  What do you think can be the best candidate(s) for a parallel implementation?
+ 
+For parallel implementation, Gaussian Elimination can be the best candidate. The data parallelization principle might serve as the foundation for the parallel Gauss method implementation. The basic computational subtask in this situation may be viewed as all calculations involved with handling a row of the matrix A and the associated element of b.
+
+5. Choose one of the described methods to code your own sequential implementation in C, using the provided code skeleton.
+
+Gaussian Elimination method. 
