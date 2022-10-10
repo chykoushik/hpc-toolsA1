@@ -1,4 +1,4 @@
-What is the purpose of this code? What does the code compute to get it?
+1. What is the purpose of this code? What does the code compute to get it?
 
 This code's goal is to compare how long it takes to solve a linear system depending on whether it uses OpenBLAS LAPACK or the user's own implementation. 
 
