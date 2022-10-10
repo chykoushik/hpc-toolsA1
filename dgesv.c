@@ -44,17 +44,12 @@ int my_dgesv(int n, int i, int j, int k,  float ratio, double *a, double *b)
 
   //Replace next line to use your own DGESV implementation
   //LAPACKE_dgesv(LAPACK_ROW_MAJOR, n, nrhs, a, lda, ipiv, b, ldb);
- //	double *a= (double *) malloc(sizeof(double) * size * size);
-//	double a[size][size
- 
-	
-//	 clrscr();
-/* Applying Gauss Elimination */
+
 	 for(i=1;i<=n-1;i++)
 	 {
 		  if(a[i] == 0.0)
 		  {
-			   //printf("Mathematical Error!");
+			   //printf("Error!");
 			   exit(0);
 		  }
 		  for(j=i+1;j<=n;j++)
@@ -68,7 +63,6 @@ int my_dgesv(int n, int i, int j, int k,  float ratio, double *a, double *b)
 		  }
 	 }
 	
-//	 getch();
 	 return(0);
 	}
 
