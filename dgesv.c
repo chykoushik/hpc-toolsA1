@@ -6,26 +6,19 @@
 //#include <mkl_lapacke.h>
 
 
-
 double *generate_matrix(int size)
 {
   int i;
   double *matrix = (double *) malloc(sizeof(double) * size * size);
 
-
-
- srand(1);
+  srand(1);
 
   for (i = 0; i < size * size; i++) {
     matrix[i] = rand() % 100;
   }
 
-
-
- return matrix;
+  return matrix;
 }
-
-
 
 int is_nearly_equal(double x, double y)
 {
@@ -33,8 +26,6 @@ int is_nearly_equal(double x, double y)
   return abs(x - y) <= epsilon * abs(x);
   // see Knuth section 4.2.2 pages 217-218
 }
-
-
 
 int check_result(double *bref, double *b, int size)
 {
@@ -45,71 +36,69 @@ int check_result(double *bref, double *b, int size)
       return 0;
   }
 
-
-
- return 1;
+  return 1;
 }
 
-
-
-int my_dgesv(int n, int nrhs, double* a, int lda, int* ipiv, double* b, int ldb, double x, double y, double* bref, int size)
+int my_dgesv(int n, int i, int j, int k,  float ratio, double *a, double *b)
 {
 
+  //Replace next line to use your own DGESV implementation
+  //LAPACKE_dgesv(LAPACK_ROW_MAJOR, n, nrhs, a, lda, ipiv, b, ldb);
+ //	double *a= (double *) malloc(sizeof(double) * size * size);
+//	double a[size][size
+ 
+	
+//	 clrscr();
+/* Applying Gauss Elimination */
+	 for(i=1;i<=n-1;i++)
+	 {
+		  if(a[i] == 0.0)
+		  {
+			   //printf("Mathematical Error!");
+			   exit(0);
+		  }
+		  for(j=i+1;j<=n;j++)
+		  {
+			   ratio = a[j]/a[i];
+			   
+			   for(k=1;k<=n+1;k++)
+			   {
+			  		a[k] = a[k] - ratio*a[i];
+			   }
+		  }
+	 }
+	
+//	 getch();
+	 return(0);
+	}
 
-
- //Replace next line to use your own DGESV implementation
-// LAPACKE_dgesv(LAPACK_ROW_MAJOR, n, nrhs, a, lda, ipiv, b, ldb);
-is_nearly_equal(x,y);
-check_result(bref, b, size);
-
-
-
-
-}
 void main(int argc, char *argv[])
 {
   int size = atoi(argv[1]);
 
-
-
- double *a, *aref;
+  double *a, *aref;
   double *b, *bref;
-  double x;
-  double y;
-
-
-
 
   a = generate_matrix(size);
   aref = generate_matrix(size);
   b = generate_matrix(size);
   bref = generate_matrix(size);
 
-
-
- // Using LAPACK dgesv OpenBLAS implementation to solve the system
+  // Using LAPACK dgesv OpenBLAS implementation to solve the system
   int n = size, nrhs = size, lda = size, ldb = size, info;
   int *ipiv = (int *) malloc(sizeof(int) * size);
+  int i, j, k, ratio =size;
+  clock_t tStart = clock();
+  info = LAPACKE_dgesv(LAPACK_ROW_MAJOR, n, nrhs, aref, lda, ipiv, bref, ldb);
+ printf("Time taken by OpenBLAS LAPACK: %.2fs\n", (double) (clock() - tStart) / CLOCKS_PER_SEC);
 
+  int *ipiv2 = (int *) malloc(sizeof(int) * size);
 
-
- clock_t tStart = clock();
-info = LAPACKE_dgesv(LAPACK_ROW_MAJOR, n, nrhs, aref, lda, ipiv, bref, ldb);
-printf("Time taken by OpenBLAS LAPACK: %.2fs\n", (double) (clock() - tStart) / CLOCKS_PER_SEC);
-
-
-
- int *ipiv2 = (int *) malloc(sizeof(int) * size);
-
-
-
- tStart = clock();
-  my_dgesv(n, nrhs, a, lda, ipiv2, b, ldb, x, y, bref, size);
+  tStart = clock();
+  my_dgesv(n, i, j, k, ratio, a, b);
   printf("Time taken by my implementation: %.2fs\n", (double) (clock() - tStart) / CLOCKS_PER_SEC);
 
-
-
- if (check_result(bref, b, size) == 1)
+  if (check_result(bref, b, size) == 1)
     printf("Result is ok!\n");
   else
     printf("Result is wrong!\n");
