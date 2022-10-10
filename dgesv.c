@@ -81,7 +81,7 @@ void main(int argc, char *argv[])
   // Using LAPACK dgesv OpenBLAS implementation to solve the system
   int n = size, nrhs = size, lda = size, ldb = size, info;
   int *ipiv = (int *) malloc(sizeof(int) * size);
-  int i, j, k, ratio =size;
+  int i, j, k; double ratio;
   clock_t tStart = clock();
   info = LAPACKE_dgesv(LAPACK_ROW_MAJOR, n, nrhs, aref, lda, ipiv, bref, ldb);
  printf("Time taken by OpenBLAS LAPACK: %.2fs\n", (double) (clock() - tStart) / CLOCKS_PER_SEC);
