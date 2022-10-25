@@ -39,7 +39,7 @@ int check_result(double *bref, double *b, int size)
   return 1;
 }
 
-int my_dgesv(int n, int i, int j, int k, double mat, int size, double *a, double *b)
+int my_dgesv(int n, int i, int j, int k, double mat, double *a, double *b)
 {
 
   //Replace next line to use your own DGESV implementation
@@ -47,17 +47,17 @@ int my_dgesv(int n, int i, int j, int k, double mat, int size, double *a, double
 
 	 for(i=1;i<=n-1;i++)
 	 {
-		  if(a[i*size+i] == 0.0)
+		  if(a[i*n+i] == 0.0)
 		  {
 			   exit(0);
 		  }
 		  for(j=i+1;j<=n;j++)
 		  {
-			   mat  = a[j*size+i]/a[i*size+i];
+			   mat  = a[j*n+i]/a[i*n+i];
 			   
 			   for(k=1;k<=n+1;k++)
 			   {
-			  		a[j*size+k]=a[j*size+k] - mat*a[i*size+k];
+			  		a[j*n+k]=a[j*n+k] - mat*a[i*n+k];
 					b[j]=b[j] - mat*b[i];
 			   }
 		  }
@@ -89,10 +89,10 @@ void main(int argc, char *argv[])
   int *ipiv2 = (int *) malloc(sizeof(int) * size);
 
   tStart = clock();
-  my_dgesv(n, i, j, k, mat, size, a, b);
+  my_dgesv(n, i, j, k, mat, a, b);
   printf("Time taken by my implementation: %.2fs\n", (double) (clock() - tStart) / CLOCKS_PER_SEC);
 
-  if (my_dgesv(n, i, j, k, mat, size, a, b) >= 0)
+  if (my_dgesv(n, i, j, k, mat, a, b) >= 0)
     printf("Result is ok!\n");
   else
     printf("Result is wrong!\n");
