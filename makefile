@@ -43,7 +43,7 @@ dgesvfast_icc: dgesv.c
 dgesvipo_icc: dgesv.c
 	icc dgesv.c -mkl -Ofast -xHost -ipo -o dgesvipo_icc
 dgesvpgo_icc: dgesv.c
-	icc dgesv.c -mkl -Ofast -xHost -ipo -prof-gen -o dgesvipo_icc
+	icc dgesv.c -mkl -Ofast -xHost -ipo -prof-gen -o dgesvpgo_icc
 dgesvvector_icc: dgesv.c
 	icc dgesv.c -mkl -xHost -O3 -o dgesvvector_icc 
 
