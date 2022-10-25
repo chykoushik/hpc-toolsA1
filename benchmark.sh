@@ -11,8 +11,7 @@ PARAM_LARGE=4096
 
 echo GCC Benchmarking
 
-GCC_TARGETS="dgesv0_gcc dgesv1_gcc dgesv2_gcc dgesv3_gcc dgesvfast_gcc dgesvipo_gcc dgesvpgo_gcc dges
-vvector_gcc"
+GCC_TARGETS="dgesv0_gcc dgesv1_gcc dgesv2_gcc dgesv3_gcc dgesvfast_gcc dgesvipo_gcc dgesvpgo_gcc dgesvvector_gcc"
 
 gcc --version
 
@@ -55,10 +54,13 @@ done
 
 echo ICC Benchmarking
 
-ICC_TARGETS="dgesv0_icc dgesv1_icc dgesv2_icc dgesv3_icc dgesvfast_icc dgesvipo_icc dgesvpgo_icc dges
-vvector_icc"
+ICC_TARGETS="dgesv0_icc dgesv1_icc dgesv2_icc dgesv3_icc dgesvfast_icc dgesvipo_icc dgesvpgo_icc dgesvvector_icc"
 
 icc --version
+
+module load intel
+module load impi
+module load imkl
 
 #Small Test
 echo " ";
