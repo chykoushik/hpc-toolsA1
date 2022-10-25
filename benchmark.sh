@@ -7,11 +7,12 @@ PARAM_SMALL=2048
 PARAM_MEDIUM=2048
 PARAM_LARGE=4096
 
-#export OMP_NUM_THREADS=24
+#export OMP_NUM_THREADS=6
 
 echo GCC Benchmarking
 
-GCC_TARGETS="dgesv0_gcc dgesv1_gcc dgesv2_gcc dgesv3_gcc dgesvfast_gcc dgesvfprofile_gcc dgesvvector_gcc"
+GCC_TARGETS="dgesv0_gcc dgesv1_gcc dgesv2_gcc dgesv3_gcc dgesvfast_gcc dgesvipo_gcc dgesvpgo_gcc dges
+vvector_gcc"
 
 gcc --version
 
@@ -54,7 +55,8 @@ done
 
 echo ICC Benchmarking
 
-ICC_TARGETS="dgesv0_icc dgesv1_icc dgesv2_icc dgesv3_icc dgesvfast_icc"
+ICC_TARGETS="dgesv0_icc dgesv1_icc dgesv2_icc dgesv3_icc dgesvfast_icc dgesvipo_icc dgesvpgo_icc dges
+vvector_icc"
 
 icc --version
 
