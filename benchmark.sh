@@ -3,7 +3,7 @@
 #SBATCH -t 00:30:00 # execution time hh:mm:ss *OB*
 
 # Parameter: N (matrix size: NxN)
-PARAM_SMALL=2048
+PARAM_SMALL=1024
 PARAM_MEDIUM=2048
 PARAM_LARGE=4096
 
